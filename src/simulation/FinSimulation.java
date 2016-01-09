@@ -8,7 +8,6 @@ public class FinSimulation extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Fin de la simulation");
 		simulateur.dateSimu = date_simulation;
 		simulateur.majAires();
 		simulateur.genereResultats();

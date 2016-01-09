@@ -8,7 +8,6 @@ public class ArriveeAppel extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Arrivée appel");
 		simulateur.dateSimu = date_simulation;
 		simulateur.a++;
 		
@@ -16,7 +15,7 @@ public class ArriveeAppel extends Evenement{
 			simulateur.qt.add(date_simulation);
 		else	{
 			simulateur.nt_dispo--;
-			simulateur.insertNewEvent(new FinTraitementAppel(date_simulation + Probabilites.uniforme(5, 15)));
+			simulateur.insertNewEvent(new FinTraitementAppel(date_simulation + Probabilites.uniforme(300, 900)));
 		}
 		
 		int date_suite = date_simulation;

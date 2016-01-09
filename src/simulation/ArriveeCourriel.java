@@ -8,7 +8,6 @@ public class ArriveeCourriel extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Arrivée courriel");
 		simulateur.dateSimu = date_simulation;
 		simulateur.c++;
 		
@@ -16,7 +15,7 @@ public class ArriveeCourriel extends Evenement{
 			simulateur.qc.add(date_simulation);
 		else	{
 			simulateur.nc_dispo--;
-			int tps_reponse = date_simulation + Probabilites.uniforme(3, 7);
+			int tps_reponse = date_simulation + Probabilites.uniforme(180, 420);
 			simulateur.rep += tps_reponse;
 			simulateur.insertNewEvent(new FinTraitementCourriel(date_simulation + tps_reponse));
 		}

@@ -8,7 +8,6 @@ public class FinTraitementCourriel extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Fin traitement courriel");
 		simulateur.dateSimu = date_simulation;
 		simulateur.c_rep ++;
 		if(simulateur.qt.size() > simulateur.nt && simulateur.nt < simulateur.ntmax)

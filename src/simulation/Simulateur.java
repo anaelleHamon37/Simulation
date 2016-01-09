@@ -27,11 +27,8 @@ public class Simulateur {
 	
 	/*Variables liées au résultat*/
 	int c_rep;
-	int courriels_non_traites;
-	double tps_attente_moyen;
-	double tps_reponse_moyen;
-	double taux_occupation_teleconseillers;
-	double taux_occupation_postes;
+	int t_rep;
+	ResultatSimulation resultat;
 	
 	public Simulateur(int n, int nt, int ntmax)	{
 		this.n = n;
@@ -53,11 +50,9 @@ public class Simulateur {
 		o_pt = 0;
 		att = 0;
 		rep = 0;
-		courriels_non_traites = 0;
-		tps_attente_moyen = 0;
-		tps_reponse_moyen = 0;
-		taux_occupation_teleconseillers = 0;
-		taux_occupation_postes = 0;
+		resultat = null;
+		c_rep = 0;
+		t_rep = 0;
 	}
 	
 	public boolean isFinished()	{
@@ -109,11 +104,11 @@ public class Simulateur {
 		att += dateSimu - qt.get(0);
 		qt.remove(0);
 		// creation du nouvel evenement
-		insertNewEvent(new FinTraitementAppel(dateSimu + Probabilites.uniforme(5, 15)));
+		insertNewEvent(new FinTraitementAppel(dateSimu + Probabilites.uniforme(300, 900)));
 	}
 	
 	public void doTraitementCourriel()	{
-		int date_finRep = dateSimu + Probabilites.uniforme(3, 7);
+		int date_finRep = dateSimu + Probabilites.uniforme(180, 420);
 		rep += date_finRep - qc.get(0);
 		qc.remove(0);
 		// creation du nouvel evenement
@@ -121,21 +116,18 @@ public class Simulateur {
 	}
 	
 	public void genereResultats()	{
-		courriels_non_traites = c - c_rep;
-		tps_attente_moyen = att / a;
-		tps_reponse_moyen = rep / c;
-		taux_occupation_teleconseillers = (o_tc / n) / 14400.;
-		taux_occupation_postes = (o_pt / ntmax) / 14400.;
+	//	int courriels_non_traites = c - c_rep;
+	//	int appels_non_traites = c - t_rep;
+		double tps_attente_moyen = att / a;
+		double tps_reponse_moyen = rep / c;
+		double taux_occupation_teleconseillers = (o_tc / n) / 14400.;
+		double taux_occupation_postes = (o_pt / ntmax) / 14400.;
+		
+		resultat = new ResultatSimulation(qc.size(), qt.size(),
+					tps_attente_moyen, tps_reponse_moyen,
+					taux_occupation_teleconseillers, taux_occupation_postes);
 	}
 	
-	public void afficheResultats()	{
-		System.out.println("Résultats de la simulation pour N = "+n+", Nt = "+nt+" et Ntmax = "+ntmax);
-		System.out.println("---------------------------");
-		System.out.println("Nombre de courriels non traités : "+courriels_non_traites);
-		System.out.println("Temps d'attente moyen pour les appels : "+(tps_attente_moyen/60)+" minutes");
-		System.out.println("Temps de réponse moyen pour les courriels : "+(tps_reponse_moyen/60)+" minutes");
-		System.out.println("Taux d'occupation des téléconseillers : "+(taux_occupation_teleconseillers*100)+" %");
-		System.out.println("Taux d'occupation des postes téléphoniques : "+(taux_occupation_postes*100)+" %");
-	}
+	
 
 }

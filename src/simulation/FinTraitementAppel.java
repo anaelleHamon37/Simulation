@@ -8,8 +8,8 @@ public class FinTraitementAppel extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Fin traitement appel");
 		simulateur.dateSimu = date_simulation;
+		simulateur.t_rep ++;
 		if(simulateur.qt.size() > 0)
 			simulateur.doTraitementAppel();
 		else

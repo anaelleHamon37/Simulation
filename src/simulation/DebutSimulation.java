@@ -8,7 +8,6 @@ public class DebutSimulation extends Evenement{
 	
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
-		System.out.println(date_simulation+" : Début de la simulation");
 		simulateur.dateSimu = date_simulation;
 		simulateur.initSimulateur();
 		simulateur.insertNewEvent(new FinSimulation(14400));
