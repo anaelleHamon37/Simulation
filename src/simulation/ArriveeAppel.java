@@ -9,7 +9,7 @@ public class ArriveeAppel extends Evenement{
 	@Override
 	public Simulateur doEvent(Simulateur simulateur) {
 		simulateur.dateSimu = date_simulation;
-		simulateur.a++;
+		simulateur.t++;
 		
 		if(simulateur.nt_dispo == 0)
 			simulateur.qt.add(date_simulation);

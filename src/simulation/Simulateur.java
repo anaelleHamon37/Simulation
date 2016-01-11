@@ -15,7 +15,7 @@ public class Simulateur {
 	List<Integer> qc ;
 	
 	/*Indicateurs*/
-	int a, c ;
+	int t, c ;
 	// taux d'occupation
 	int o_tc, o_pt ;
 	// temps d'attente/réponse
@@ -44,7 +44,7 @@ public class Simulateur {
 		nc_dispo = nc;
 		qt = new ArrayList<Integer>();
 		qc = new ArrayList<Integer>();
-		a = 0;
+		t = 0;
 		c = 0;
 		o_tc = 0;
 		o_pt = 0;
@@ -119,10 +119,10 @@ public class Simulateur {
 		int courriels_non_traites = c - c_rep;
 		int appels_non_traites = c - t_rep;
 		for(Integer date : qt)
-			att += date;
-		double tps_attente_moyen = att / a;
+			att += (dateSimu - date);
+		double tps_attente_moyen = att / t;
 		for(Integer date : qc)
-			rep += date;
+			rep += (dateSimu - date);
 		double tps_reponse_moyen = rep / c;
 		double taux_occupation_teleconseillers = (o_tc / n) / 14400.;
 		double taux_occupation_postes = (o_pt / ntmax) / 14400.;
