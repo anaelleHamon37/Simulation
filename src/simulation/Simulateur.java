@@ -116,14 +116,18 @@ public class Simulateur {
 	}
 	
 	public void genereResultats()	{
-	//	int courriels_non_traites = c - c_rep;
-	//	int appels_non_traites = c - t_rep;
+		int courriels_non_traites = c - c_rep;
+		int appels_non_traites = c - t_rep;
+		for(Integer date : qt)
+			att += date;
 		double tps_attente_moyen = att / a;
+		for(Integer date : qc)
+			rep += date;
 		double tps_reponse_moyen = rep / c;
 		double taux_occupation_teleconseillers = (o_tc / n) / 14400.;
 		double taux_occupation_postes = (o_pt / ntmax) / 14400.;
 		
-		resultat = new ResultatSimulation(qc.size(), qt.size(),
+		resultat = new ResultatSimulation(courriels_non_traites, appels_non_traites,
 					tps_attente_moyen, tps_reponse_moyen,
 					taux_occupation_teleconseillers, taux_occupation_postes);
 	}
